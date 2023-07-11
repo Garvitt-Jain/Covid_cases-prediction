@@ -30,7 +30,7 @@ def calmape(pred , observed):
 
 #Question 1  Autocorrelation line plot with lagged values:
 
-covid_df_orig = pd.read_csv("daily_covid_cases.csv")
+covid_df_orig = pd.read_csv("covid_cases_csv.txt")
 covid_df = covid_df_orig.copy()
 covid_df["Date"] = pd.to_datetime(covid_df["Date"])  
 
@@ -81,7 +81,7 @@ plt.show()
 
 # Question 2
 #Part-A # Spliting the given data in train and test 
-series = pd.read_csv('daily_covid_cases.csv',
+series = pd.read_csv('"covid_cases_csv.txt"',
                       parse_dates=['Date'],
                       index_col=['Date'],
                       sep=',')
@@ -167,7 +167,7 @@ for l in lag:
 # Bar chart showing RMSE (%) on the y-axis and lagged values on the x-axis.
 fig = plt.figure(figsize = (10, 5))
 # creating the bar plot
-plt.bar(list(drmse.keys()),list(drmse.values()), color ='maroon',width = 0.4)
+plt.bar(list(drmse.keys()),list(drmse.values()), color ='maroon',width = 0.4,log = True)
 plt.grid(True)      
 plt.xlabel("Lag value used")
 plt.ylabel("Root Mean square error")
@@ -178,7 +178,7 @@ print("-------------------------------------------------------------------------
 fig = plt.figure(figsize = (10, 5))
 # creating the bar plot
 plt.bar(list(dmape.keys()),list(dmape.values()), color ='maroon',
-        width = 0.4)
+        width = 0.4,log =True)
 plt.grid(True)    
 plt.xlabel("Lag value used")
 plt.ylabel("Mean absolute percentage error")
@@ -238,3 +238,5 @@ for t in range(len(test)):
 print("The root mean square error calculated between predicted covid cases and actual covid cases for optimal lag is "+str(calrmse(predictions,test)))
 print("-------------------------------------------------------------------------------------------------")
 print("The Mean absolute percentage  error calculated between predicted covid cases and actual covid cases for optimal lag is "+str(calmape(predictions,test)))
+
+From the above analysis, we can predict that the lag value for Predicting covid cases with minumum rmse and minimum mape is lag = 15
